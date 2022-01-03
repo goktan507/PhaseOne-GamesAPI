@@ -70,7 +70,6 @@ exports.getOneGame = (req, res) => {
                     "assists": pResult.assists,
                     "teamPlacement": pResult.teamPlacement,
                     "damageDealt": pResult.damageDealt,
-                    "teamNum": pResult.teamNum,
                     "teamName": pResult.teamName,
                     "survivalTime": pResult.survivalTime
                 })
@@ -92,7 +91,6 @@ exports.getOneGame = (req, res) => {
                     { id: "assists", title: "assists" },
                     { id: "teamPlacement", title: "teamPlacement" },
                     { id: "damageDealt", title: "damageDealt" },
-                    { id: "teamNum", title: "teamNum" },
                     { id: "teamName", title: "teamName" },
                     { id: "survivalTime", title: "survivalTime" },
                 ]
