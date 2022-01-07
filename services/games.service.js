@@ -141,37 +141,49 @@ exports.downloadGame = (req, res) => {
             );
             let date = new Date(response.data.matches[0].match_start * 1000).toLocaleString();
             
+            let csvSorted = [];
+            let placement = 1;
+            while(csvSorted.length != csvResults.length){
+                for (let i = 0; i < csvResults.length; i++) {
+                    if(csvResults[i].teamPlacement == placement){
+                        csvSorted.push(csvResults[i]);
+                    }
+                }
+                placement++;
+            }
+            
+
             const fields = [{
                 label: date,
                 value: ''
             }, {
-                label: 'kills',
-                value: 'kills'
-            }, {
-                label: 'characterName',
-                value: 'characterName'
-            }, {
-                label: 'playerName',
-                value: 'playerName'
-            }, {
-                label: 'assists',
-                value: 'assists'
-            }, {
                 label: 'teamPlacement',
                 value: 'teamPlacement'
-            }, {
-                label: 'damageDealt',
-                value: 'damageDealt'
             }, {
                 label: 'teamName',
                 value: 'teamName'
             }, {
+                label: 'playerName',
+                value: 'playerName'
+            }, {
+                label: 'characterName',
+                value: 'characterName'
+            }, {
+                label: 'kills',
+                value: 'kills'
+            },   {
+                label: 'assists',
+                value: 'assists'
+            }, {
+                label: 'damageDealt',
+                value: 'damageDealt'
+            },  {
                 label: 'survivalTime',
                 value: 'survivalTime'
             }];
             const json2csv = new Parser({ fields: fields });
 
-            const csv = json2csv.parse(csvResults);
+            const csv = json2csv.parse(csvSorted);
             res.attachment('game_results.csv');
             res.status(200).send(csv);
 
